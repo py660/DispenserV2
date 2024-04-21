@@ -2,11 +2,13 @@
     {
         "name": "Free",
         "root": "free",
-        "role": null
+        "role": null,
+        "cooldown":"3600"
     },
     {
         "name": "Booster",
         "root": "booster",
-        "role": null
+        "role": null,
+        "cooldown":"1800"
     }
 ]

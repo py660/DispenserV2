@@ -1,9 +1,9 @@
 import Discord from 'discord.js';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
-
 import registerCommands from './commands/index.js';
-
+import registerComponents from './components/index.js';
+import initializeLinksAndDB from './setup.js'
 config();
 
 // Define Discord Bot Client With All Intents
@@ -12,11 +12,8 @@ const client = new Discord.Client({
 });
 
 registerCommands(client);
-
-// Connect to DB
-mongoose.connect(process.env.MONGODB_URI, { dbName: 'NewDispenser',})
-.then(() => console.log('Connected to MongoDB'))
-.catch((e) => console.error('Failed to Connect to MongoDB', e));
+registerComponents(client);
+initializeLinksAndDB();
 
 // On Ready
 client.on('ready', () => {
