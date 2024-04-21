@@ -6,7 +6,7 @@ export default {
         .setName('panel')
         .setDescription('Get Link Dispenser Panel'),
     async handler(interaction, client) {
-        fs.readFile('./types.json', 'utf8', (err, data) => {
+        fs.readFile('./bot/types.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
                 return;
@@ -23,7 +23,7 @@ export default {
                     }
                     const button = new Discord.ButtonBuilder()
                         .setLabel(type.name)
-                        .setStyle('PRIMARY')
+                        .setStyle(Discord.ButtonStyle.Primary)
                         .setCustomId(type.root);
                     buttons.push(button);
                 });
@@ -31,13 +31,16 @@ export default {
                 if (buttons.length > 0) {
                     rows.push(new Discord.ActionRowBuilder().addComponents(...buttons));
                 }
-
                 interaction.reply({
                     embeds: [
-                        new Discord.MessageEmbed()
-                            .setTitle('Link Dispenser')
-                            .setDescription('Get Access to Shadow Links! Please do not report links because they are blocked.')
-                            .setColor("#272ef5"),
+                        new Discord.EmbedBuilder()
+                            .setTitle('Dispenser')
+                            .setDescription('Click the buttons below to dispense items.')
+                            .setFooter({
+                                text:"Shadow Dispenser",
+                                iconURL: client.user.displayAvatarURL(),
+                            })
+                            .setColor("#0e011a"),
                     ],
                     components: rows,
                 });

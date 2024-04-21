@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
+
 import registerCommands from './commands/index.js';
 
 config();
