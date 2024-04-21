@@ -50,7 +50,7 @@ const dispense = async (client, interaction) => {
         await interaction.reply({ embeds:[
             new Discord.EmbedBuilder()
                 .setTitle("User Cooldown")
-                .setDescription("Please wait for: `" + formatCooldown(timeLeft) + "`\n Next Dispense is available at:" + `<t:${DateforNext}:R>`)
+                .setDescription("Please wait for: `" + formatCooldown(timeLeft) + "`\n Next Dispense is available at: " + `<t:${DateforNext}>`)
                 .setFooter({
                     text:"Shadow Dispenser",
                     iconURL: client.user.displayAvatarURL(),
