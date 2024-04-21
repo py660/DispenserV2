@@ -8,7 +8,7 @@
     {
         "name": "Booster",
         "root": "booster",
-        "role": null,
-        "cooldown":"1800"
+        "role": "1231711466772627536",
+        "cooldown":"3600"
     }
 ]
