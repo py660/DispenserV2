@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Free",
+        "root": "free",
+        "role": null
+    },
+    {
+        "name": "Booster",
+        "root": "booster",
+        "role": null
+    }
+]
