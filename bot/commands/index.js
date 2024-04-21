@@ -18,8 +18,6 @@ const registerCommands = async (client) => {
         const { default: command } = await import('./' + files[i]);
 
         commands.set(command.meta.name, command);
-
-        console.log(command.meta);
         commandsMeta.push(command.meta.toJSON());
     }
 
@@ -34,7 +32,9 @@ const registerCommands = async (client) => {
     client.on(Discord.Events.InteractionCreate, async (interaction) => {
         if (!interaction.isChatInputCommand()) return;
 
-
+        const command = commands.get(interaction.commandName);
+        
+        command.handler(interaction, client);
     });
 }
 
