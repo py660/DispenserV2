@@ -3,12 +3,18 @@
         "name": "Free",
         "root": "free",
         "role": null,
-        "cooldown":"3600"
+        "cooldown":"43200"
     },
     {
         "name": "Booster",
         "root": "booster",
         "role": "1231711466772627536",
-        "cooldown":"3600"
+        "cooldown":"28800"
+    },
+    {
+        "name": "Premium",
+        "root": "premium",
+        "role": "",
+        "cooldown":"10800"
     }
 ]

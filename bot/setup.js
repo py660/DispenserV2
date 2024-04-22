@@ -38,7 +38,7 @@ const initializeLinksAndDB = async () => {
                         }
                     }
 
-                    console.log(`Added ${links.length} links for type ${type.root}`);
+                    console.log(`Added All New Links!`);
                 } else {
                     fs.writeFileSync(filePath, '', 'utf8');
                     console.log(`Created ${type.root}.txt for type ${type.root}`);

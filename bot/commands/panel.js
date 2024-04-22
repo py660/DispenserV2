@@ -30,6 +30,12 @@ export default {
 
                 if (buttons.length > 0) {
                     rows.push(new Discord.ActionRowBuilder().addComponents(...buttons));
+                    rows.push(new Discord.ActionRowBuilder().addComponents(
+                        new Discord.ButtonBuilder()
+                            .setCustomId('report')
+                            .setLabel("⚠️ Report Link")
+                            .setStyle(Discord.ButtonStyle.Danger)
+                    ));
                 }
                 interaction.reply({
                     embeds: [
@@ -37,7 +43,7 @@ export default {
                             .setTitle('Dispenser')
                             .setDescription('Click the buttons below to dispense items.')
                             .setFooter({
-                                text:"Shadow Dispenser",
+                                text: "Shadow Dispenser",
                                 iconURL: client.user.displayAvatarURL(),
                             })
                             .setColor("#0e011a"),

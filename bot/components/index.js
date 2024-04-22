@@ -5,13 +5,10 @@ const componentsDir = path.join(new URL('./', import.meta.url).pathname);
 
 const registerComponents = (client) => {
     client.on('interactionCreate', async (interaction) => {
-        if (!interaction.isButton()) return;
-
         const customId = interaction.customId;
         
         try {
             const files = fs.readdirSync(componentsDir);
-            
             for (const file of files) {
                 const componentFilePath = path.join(componentsDir, file);
                 const { default: component } = await import(componentFilePath);
