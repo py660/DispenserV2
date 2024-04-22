@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import Link from './models/linkSchema.js';
 import Discord from 'discord.js';
+import { config } from 'dotenv';
+config();
 
 const typesFile = new URL('./types.json', import.meta.url).pathname;
 const cooldowns = new Map();
@@ -135,6 +137,25 @@ const dispense = async (client, interaction) => {
         content: `Check your DMs. [[Jump to Message]](${message.url})`,
         ephemeral: true
     });
+
+    const webhookUrl = process.env.LOG_WEBHOOK_URL;
+    if (webhookUrl && webhookUrl.trim() !== '') {
+        const webhookClient = new Discord.WebhookClient({ url: webhookUrl });
+        webhookClient.send({
+            username: 'Dispenser Logs',
+            embeds: [
+                new Discord.EmbedBuilder()
+                    .setTitle("Domain Dispensed!")
+                    .setAuthor({ name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() })
+                    .setColor("#0e011a")
+                    .addFields(
+                        { name: 'Link', value: "```" + `${link.url}` + "```" },
+                        { name: 'Type', value: "```" + type.name + "```" }
+                    )
+            ],
+        });
+    }
+
 
 };
 
