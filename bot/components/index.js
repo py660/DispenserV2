@@ -5,6 +5,8 @@ const componentsDir = path.join(new URL('./', import.meta.url).pathname);
 
 const registerComponents = (client) => {
     client.on('interactionCreate', async (interaction) => {
+        if (interaction.isCommand()) return;
+
         const customId = interaction.customId;
         
         try {
