@@ -37,7 +37,7 @@ export default {
         await interaction.deferReply({ ephemeral: true });
 
         let url = interaction.options.getString('url');
-        const type = interaction.options.getString('type');
+        let type = interaction.options.getString('type');
 
         url = url.replace(/^https?:\/\//i, '');
         url = url.replace(/\/$/, '');
@@ -45,22 +45,17 @@ export default {
         try {
             const typesData = await fs.promises.readFile('./bot/types.json', 'utf8');
             const types = JSON.parse(typesData);
+            type = types.find(t => t.root === type);
 
-            const valid = types.find(t => t.root === type);
-            if (!valid) {
-                await interaction.editReply('Invalid type provided.');
-                return;
-            }
-
-            const findExistingLink = await Link.findOne({ url, type: valid.root });
+            const findExistingLink = await Link.findOne({ url, type: type.root });
             if (!findExistingLink) {
                 await interaction.editReply('This link does not exist in the database.');
                 return;
             }
 
-            await Link.findOneAndDelete({ url, type: valid.root });
+            await Link.findOneAndDelete({ url, type: type.root });
 
-            await interaction.editReply(`Link "${url}" of type "${valid.name}" removed successfully!`);
+            await interaction.editReply(`Link has been removed!\n**Link:** \`${url}\` \n**Type:** \`${type.name}\``);
         } catch (error) {
             console.error('Error processing request:', error);
             await interaction.editReply('An error occurred while processing your request.');
