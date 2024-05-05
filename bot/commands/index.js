@@ -31,9 +31,13 @@ const registerCommands = async (client) => {
 
     client.on(Discord.Events.InteractionCreate, async (interaction) => {
         if (!interaction.isChatInputCommand()) return;
-
+        const member = interaction.member;
+        if (!member.roles.cache.has(process.env.ADMIN_ROLE)) {
+            await interaction.reply({ content: "You are not allowed to run this command.", ephemeral: true });
+            return;
+        }
         const command = commands.get(interaction.commandName);
-        
+
         command.handler(interaction, client);
     });
 }
