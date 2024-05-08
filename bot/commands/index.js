@@ -24,7 +24,7 @@ const registerCommands = async (client) => {
     client.on('ready', async () => {
         await new Discord.REST()
             .setToken(process.env.DISCORD_TOKEN)
-            .put(Discord.Routes.applicationGuildCommands(process.env.DISCORD_APPLICATION_ID, '1187934890113642596'), {
+            .put(Discord.Routes.applicationGuildCommands(process.env.DISCORD_APPLICATION_ID, process.env.GUILD_ID), {
                 body: commandsMeta
             });
     });
